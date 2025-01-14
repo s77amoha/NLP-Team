@@ -1,2 +1,47 @@
 # NLP-Team
 NLP Team 23
+
+2. Dataset:
+	1.Statistical measures: 
+		1. Basic:
+			Corpus Size:
+				Total number of documents.
+				Total number of tokens (words, punctuation, etc.).
+			Vocabulary Size:
+				Number of unique words or terms in the corpus.
+			Average Document Length:
+				Mean number of words or tokens per document.
+		2. Lexical Diversity
+			Type-Token Ratio (TTR)
+		3.Word Frequency Distribution:
+			Word Frequency Count
+		4.Syntactic and Grammatical Measures:
+			Part-of-Speech (POS) Distribution: Frequency and proportions of POS tags (e.g., nouns, verbs).
+	
+3.Methodology
+	1.Data Preprocessing:
+		Data cleansing: Remove Unnecessary Characters, Case Sensitivity, Remove Stopwords, Remove Contractions (e.g., "don't" → "do not") 
+		Tokenization
+		Lemmatization
+		Class Imbalance (imbalanced class distributions): weighed classes
+		Data split and cross validation
+	2.Feature Extraction
+		TF-IDF, N-grams, POS, Word Embeddings or Contextual Embeddings
+	3 Modeling Techniques 
+		Traditional (uses BOW, TF-IDF):  Naive Bayes, Random Forests
+		Deep learning (uses Word2Vec, GloVe): NN, RNN
+		Transformer: BERT
+	4.Evaluation: picking the correct metrics to compare the models
+	
+4. Expected Results: better understanding of the corpus and also a clear way to compare the performance of the models and their pipelines
+
+5. Evaluation Metrics:
+	basic classification metrics: accuracy, precision, recall, F1-score, confusion matrix, ...
+	multi-class classification: macro/micro-averaged metrics	
+ 6. Challenges: beside the ones in the report
+ 	finding the best fitting methods to clean the corpus
+ 	picking interesting models and pipelines to understand the corpus better 
+ 	picking meaningful metrics to compare the results of the different models 
+ 	
+ 	
+
