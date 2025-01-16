@@ -1,0 +1,3 @@
+name,epochs_coarse,epochs_fine,t. params coarse,t. params fine,window,other
+attempt1,20,20,"58,294","62,779",7
+attempt2,30,40,"737,594","742,079",7
