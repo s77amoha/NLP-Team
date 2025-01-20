@@ -6,7 +6,7 @@ import pandas as pd
 from gensim.models import Word2Vec
 
 # noinspection PyUnresolvedReferences
-from tensorflow.keras.layers import Input, Embedding, Dense, GlobalMaxPooling1D, Dropout
+from tensorflow.keras.layers import Input, Embedding, Dense, GlobalMaxPooling1D, Dropout, concatenate, Lambda
 # noinspection PyUnresolvedReferences
 from tensorflow.keras.models import Model as KerasModel, Sequential
 # noinspection PyUnresolvedReferences
@@ -41,22 +41,33 @@ def f1_m(y_true, y_pred):
 
 
 def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix, embedding_dim):
-    model = Sequential([
-        Input(shape=(max_doc_length,), name="Input"),
-        Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_doc_length, weights=[embedding_matrix], name="Word2Vec", trainable=False),
+    input_layer = Input(shape=(1 + max_doc_length,), name="Input")
+    input_lang = Lambda(lambda x: x[:, :1], name="lang_input")(input_layer)
+    input_text = Lambda(lambda x: x[:, 1:], name="text_input")(input_layer)
+    embedding_layer = Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_doc_length,
+                                weights=[embedding_matrix], name="Word2Vec", trainable=False)(input_text)
+
+    sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.2, name="Dropout_1"),
+        Dropout(0.3, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
+    ], name="NN1")(embedding_layer)
+
+    language_info = Dense(1, name="lang")(input_lang)
+    concat = concatenate([language_info, sequential_part1], name="Concat")
+    sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.1, name="Dropout_2"),
+        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
         Dense(100, activation='relu', name="Dense_7"),
         Dense(64, activation='elu', name="Dense_8"),
         Dense(num_labels, activation="sigmoid", name="Output")
-    ], name="TextClassifier_Coarse")
+    ], name="NN2")(concat)
+
+    model = KerasModel(input_layer, sequential_part2, name="TextClassifier_Coarse")
 
     #Default start lr for adam is 0.001
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy', f1_m, precision_m, recall_m])
@@ -66,31 +77,46 @@ def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix
 
 
 def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, embedding_dim):
-    model = Sequential([
-        Input(shape=(max_doc_length,), name="Input"),
-        Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_doc_length, weights=[embedding_matrix], name="Word2Vec", trainable=False),
+    input_layer = Input(shape=(1 + max_doc_length,), name="Input")
+    input_lang = Lambda(lambda x: x[:, :1], name="lang_input")(input_layer)
+    input_text = Lambda(lambda x: x[:, 1:], name="text_input")(input_layer)
+    embedding_layer = Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=max_doc_length,
+                                weights=[embedding_matrix], name="Word2Vec", trainable=False)(input_text)
+
+    sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.2, name="Dropout_1"),
+        Dropout(0.3, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
+    ], name="NN1")(embedding_layer)
+
+    language_info = Dense(1, name="lang")(input_lang)
+    concat = concatenate([language_info, sequential_part1], name="Concat")
+    sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.1, name="Dropout_2"),
+        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
         Dense(100, activation='relu', name="Dense_7"),
         Dense(64, activation='elu', name="Dense_8"),
         Dense(num_labels, activation="sigmoid", name="Output")
-    ], name="TextClassifier_Fine")
+    ], name="NN2")(concat)
 
+    model = KerasModel(input_layer, sequential_part2, name="TextClassifier_Fine")
+
+    # Default start lr for adam is 0.001
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy', f1_m, precision_m, recall_m])
     model.summary()
 
     return model
 
 
-def train(texts, labels_coarse, labels_fine, val_texts, val_labels_coarse, val_labels_fine, all_classes_coarse,
-          all_classes_fine, name, max_doc_length=924, vocab_size=21543, embedding_dim=100):
+def train(texts, labels_coarse, labels_fine, language_train,
+          val_texts, val_labels_coarse, val_labels_fine, language_val,
+          all_classes_coarse, all_classes_fine, name,
+          max_doc_length=924, vocab_size=21543, embedding_dim=100):
+
     # Tokenizer
     tokenizer = Tokenizer(num_words=vocab_size)
     tokenizer.fit_on_texts(texts + val_texts)
@@ -100,12 +126,23 @@ def train(texts, labels_coarse, labels_fine, val_texts, val_labels_coarse, val_l
     val_sequence_pad = pad_sequences(val_sequences, maxlen=max_doc_length, padding='post')
 
     # Convert to training data
-    sequence_pad = tf.convert_to_tensor(sequence_pad)
-    val_sequence_pad = tf.convert_to_tensor(val_sequence_pad)
     labels_coarse = tf.convert_to_tensor([[1 if label in labels_coarse[i] else 0 for label in all_classes_coarse] for i in range(len(labels_coarse))])
     labels_fine = tf.convert_to_tensor([[1 if label in labels_fine[i] else 0 for label in all_classes_fine] for i in range(len(labels_fine))])
     val_labels_coarse = tf.convert_to_tensor([[1 if label in val_labels_coarse[i] else 0 for label in all_classes_coarse] for i in range(len(val_labels_coarse))])
     val_labels_fine = tf.convert_to_tensor([[1 if label in val_labels_fine[i] else 0 for label in all_classes_fine] for i in range(len(val_labels_fine))])
+
+    # Add language information
+    language_train = np.array(language_train)
+    language_train[language_train == "en"] = 1
+    language_train[language_train == "pt"] = -1
+    language_val = np.array(language_val)
+    language_val[language_val == "en"] = 1
+    language_val[language_val == "pt"] = -1
+
+    sequence_pad = np.column_stack((language_train, sequence_pad))
+    val_sequence_pad = np.column_stack((language_val, val_sequence_pad))
+    sequence_pad = tf.convert_to_tensor(sequence_pad, dtype=float)
+    val_sequence_pad = tf.convert_to_tensor(val_sequence_pad, dtype=float)
 
     with open(f'./models/tokenizer_{name}.pickle', 'wb') as handle:
         pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
@@ -120,7 +157,7 @@ def train(texts, labels_coarse, labels_fine, val_texts, val_labels_coarse, val_l
 
     # Compile models
     print("Compiling sub-models...")
-    coarse_submodel = create_model_coarse(len(all_classes_coarse), max_doc_length, vocab_size, embedding_matrix,embedding_dim)
+    coarse_submodel = create_model_coarse(len(all_classes_coarse), max_doc_length, vocab_size, embedding_matrix, embedding_dim)
     fine_submodel = create_model_fine(len(all_classes_fine), max_doc_length, vocab_size, embedding_matrix, embedding_dim)
 
     # Train
@@ -168,25 +205,30 @@ if __name__ == '__main__':
     df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates()
 
     texts = df["content"].apply(lambda entry: entry.split()).to_numpy()
+    languages = df["language"].to_numpy()
     labels_coarse = df["narrative"].apply(lambda entry: entry.split(";")).to_numpy()
     labels_fine = df["subnarrative"].apply(lambda entry: entry.split(";")).to_numpy()
 
-    train_indices = np.random.choice(range(len(texts)), int(len(texts) * 0.8), replace=False)
-    val_indices = set(range(len(texts))) - set(train_indices)
+    train_indices = np.load("./train_indices.npy", allow_pickle=True)
+    val_indices = np.load("./val_indices.npy", allow_pickle=True)
 
     texts_train = list([texts[i] for i in train_indices])
     labels_coarse_train = list([labels_coarse[i] for i in train_indices])
     labels_fine_train = list([labels_fine[i] for i in train_indices])
+    lang_train = list([languages[i] for i in train_indices])
     texts_val = list([texts[i] for i in val_indices])
     labels_coarse_val = list([labels_coarse[i] for i in val_indices])
     labels_fine_val = list([labels_fine[i] for i in val_indices])
+    lang_val = list([languages[i] for i in val_indices])
 
     train(texts_train,
           labels_coarse_train,
           labels_fine_train,
+          lang_train,
           texts_val,
           labels_coarse_val,
           labels_fine_val,
+          lang_val,
           classes_coarse,
           classes_fine,
-          "attempt2")
+          "attempt3")

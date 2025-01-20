@@ -1,5 +1,7 @@
 import csv
 import pickle
+
+import pandas as pd
 # noinspection PyUnresolvedReferences
 from tensorflow.keras.models import load_model
 # noinspection PyUnresolvedReferences
@@ -44,5 +46,13 @@ class Model:
 
 #load model
 model = Model("attempt2")
+
+df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates()
+
+texts = df["content"].apply(lambda entry: entry.split()).to_numpy()
+titles = df["title"].to_numpy()
+languages = df["language"].to_numpy()
+labels_coarse = df["narrative"].apply(lambda entry: entry.split(";")).to_numpy()
+labels_fine = df["subnarrative"].apply(lambda entry: entry.split(";")).to_numpy()
 
 #TODO
