@@ -1,0 +1,6 @@
+name,epochs_coarse,t. params coarse,window,f1_coarse,precision_coarse,recall_coarse,accuracy
+attempt1,20,"58,294",7
+attempt2,30,"737,594",7
+attempt3,30,"737,796",7,0.4,""
+attempt3-window10,30,"737,796",10,0.43
+new-1,30,"737,796",10,0.44,0.75,0.34,5000

@@ -1,0 +1,6 @@
+name,epochs_fine,t. params fine,window,f1_fine,precision_fine,recall_fine,accuracy
+attempt1,20,"62,779",7
+attempt2,40,"742,079",7
+attempt3,40,"742,281",7,0.18,""
+attempt3-window10,40,"742,281",10,0.187
+new-1,40,"742,281",10,0.25,0.41,0.18,0.3

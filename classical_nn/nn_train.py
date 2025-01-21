@@ -119,7 +119,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
 
     # Tokenizer
     tokenizer = Tokenizer(num_words=vocab_size)
-    tokenizer.fit_on_texts(texts + val_texts)
+    tokenizer.fit_on_texts(texts + texts_val)
     sequences = tokenizer.texts_to_sequences(texts)
     sequence_pad = pad_sequences(sequences, maxlen=max_doc_length, padding='post')
     val_sequences = tokenizer.texts_to_sequences(val_texts)
@@ -148,7 +148,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
         pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     #Word2Vec Embedding
-    word2vec_model = Word2Vec(texts, vector_size=embedding_dim, window=7, min_count=1, workers=4)
+    word2vec_model = Word2Vec(texts, vector_size=embedding_dim, window=10, min_count=1, workers=4)
 
     embedding_matrix = np.zeros((len(tokenizer.word_index) + 1, embedding_dim))
     for word, i in tokenizer.word_index.items():
@@ -202,12 +202,14 @@ if __name__ == '__main__':
     classes_coarse = open("subtask2_narratives.txt").read().split("\n")
     classes_fine = open("subtask2_subnarratives.txt").read().split("\n")
 
-    df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates()
+    df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates(subset="title", keep="first")
 
     texts = df["content"].apply(lambda entry: entry.split()).to_numpy()
     languages = df["language"].to_numpy()
     labels_coarse = df["narrative"].apply(lambda entry: entry.split(";")).to_numpy()
     labels_fine = df["subnarrative"].apply(lambda entry: entry.split(";")).to_numpy()
+
+    print(len(texts))
 
     train_indices = np.load("./train_indices.npy", allow_pickle=True)
     val_indices = np.load("./val_indices.npy", allow_pickle=True)
@@ -231,4 +233,4 @@ if __name__ == '__main__':
           lang_val,
           classes_coarse,
           classes_fine,
-          "attempt3")
+          "attempt3-window10")

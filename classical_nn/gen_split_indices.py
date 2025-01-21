@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates()
+df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates(subset="title", keep="first")
 
 length = df.shape[0]
 
