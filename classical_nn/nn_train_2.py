@@ -50,7 +50,7 @@ def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix
     sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.3, name="Dropout_1"),
+        Dropout(0.2, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
@@ -60,10 +60,11 @@ def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix
     concat = concatenate([language_info, sequential_part1], name="Concat")
     sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
-        Dense(100, activation='relu', name="Dense_7"),
-        Dense(64, activation='elu', name="Dense_8"),
+        Dropout(0.2, name="Dropout_2"),
+        Dense(200, activation='relu', name="Dense_7"),
+        Dense(100, activation='relu', name="Dense_8"),
+        Dense(64, activation='elu', name="Dense_9"),
         Dense(num_labels, activation="sigmoid", name="Output")
     ], name="NN2")(concat)
 
@@ -86,7 +87,7 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
     sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.3, name="Dropout_1"),
+        Dropout(0.2, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
@@ -96,10 +97,11 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
     concat = concatenate([language_info, sequential_part1], name="Concat")
     sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
-        Dense(100, activation='relu', name="Dense_7"),
-        Dense(64, activation='elu', name="Dense_8"),
+        Dropout(0.2, name="Dropout_2"),
+        Dense(200, activation='relu', name="Dense_7"),
+        Dense(100, activation='relu', name="Dense_8"),
+        Dense(64, activation='elu', name="Dense_9"),
         Dense(num_labels, activation="sigmoid", name="Output")
     ], name="NN2")(concat)
 
@@ -182,7 +184,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
     print("Coarse Model....")
     coarse_submodel.fit(sequence_pad,
                         labels_coarse,
-                        epochs=30,
+                        epochs=50,
                         verbose=1,
                         callbacks=[coarse_checkpoint],
                         validation_data=(val_sequence_pad, val_labels_coarse),
@@ -191,7 +193,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
     print("Fine Model....")
     fine_submodel.fit(sequence_pad,
                       labels_fine,
-                      epochs=40,
+                      epochs=50,
                       verbose=1,
                       callbacks=[fine_checkpoint],
                       validation_data=(val_sequence_pad, val_labels_fine),
@@ -228,4 +230,4 @@ if __name__ == '__main__':
           lang_val,
           classes_coarse,
           classes_fine,
-          "new-1")
+          "new-2")
