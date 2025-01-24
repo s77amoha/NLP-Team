@@ -1,0 +1,77 @@
+Filename,Predicted Language,Predicted Narrative,Predicted Subnarrative
+EN_UA_DEV_100012.txt,EN,Other,Other
+EN_CC_200053.txt,EN,CC: Criticism of institutions and authorities;Other,Other
+EN_CC_200040.txt,EN,CC: Criticism of climate movement;CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_CC_200070.txt,EN,Other,Other
+EN_UA_DEV_100034.txt,EN,Other,Other
+EN_CC_200049.txt,EN,CC: Criticism of climate movement;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_UA_DEV_100003.txt,EN,Other,Other
+EN_UA_DEV_100033.txt,EN,Other,Other
+EN_CC_200036.txt,EN,CC: Criticism of climate movement;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_CC_200079.txt,EN,CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_UA_DEV_100029.txt,EN,Other,Other
+EN_UA_DEV_20.txt,EN,Other,Other
+EN_UA_DEV_100005.txt,EN,Other,Other
+EN_CC_200033.txt,EN,CC: Criticism of climate movement;Other,Other
+EN_CC_200071.txt,EN,CC: Controversy about green technologies;CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_CC_200046.txt,EN,CC: Hidden plots by secret schemes of powerful groups;CC: Questioning the measurements and science;Other,Other
+EN_CC_200050.txt,EN,CC: Criticism of institutions and authorities;Other,Other
+EN_UA_DEV_100026.txt,EN,Other,Other
+EN_UA_DEV_215.txt,EN,Other,Other
+EN_CC_200063.txt,EN,CC: Criticism of climate policies;CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_CC_200054.txt,EN,Other,Other
+EN_UA_DEV_100004.txt,EN,Other,Other
+EN_UA_DEV_100013.txt,EN,Other,Other
+EN_CC_200077.txt,EN,CC: Criticism of climate policies;CC: Criticism of institutions and authorities;Other,Other
+EN_UA_DEV_100036.txt,EN,Other,Other
+EN_CC_200034.txt,EN,CC: Criticism of institutions and authorities;Other,Other
+EN_UA_DEV_213.txt,EN,Other,Other
+EN_CC_200047.txt,EN,CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,Other
+EN_CC_200085.txt,EN,CC: Criticism of climate policies;CC: Criticism of institutions and authorities;Other,Other
+EN_CC_200081.txt,EN,Other,Other
+EN_UA_DEV_214.txt,EN,Other,Other
+EN_CC_200064.txt,EN,CC: Criticism of climate movement;Other,Other
+EN_UA_DEV_22.txt,EN,Other,Other
+EN_CC_200060.txt,EN,Other,Other
+EN_CC_200035.txt,EN,CC: Controversy about green technologies;CC: Criticism of climate policies;CC: Criticism of institutions and authorities;Other,Other
+EN_CC_200030.txt,EN,Other,Other
+EN_CC_200069.txt,EN,CC: Criticism of institutions and authorities;CC: Hidden plots by secret schemes of powerful groups;Other,CC: Criticism of institutions and authorities: Criticism of national governments;CC: Hidden plots by secret schemes of powerful groups: Blaming global elites;Other
+EN_UA_DEV_100019.txt,EN,Other,Other
+EN_CC_200078.txt,EN,Other,Other
+EN_CC_200065.txt,EN,CC: Criticism of climate movement;Other,Other
+EN_UA_DEV_100002.txt,EN,Other,Other
+PT_203.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_208.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_216.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of climate policies;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other;CC: Criticism of institutions and authorities: Criticism of national governments
+PT_233.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_241.txt,PT,"URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Negative Consequences for the West;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting the West, Diplomacy: Other;URW: Negative Consequences for the West: Other;URW: Russia is the Victim: Russia actions in Ukraine are only self-defence"
+PT_259.txt,PT,"URW: Blaming the war on others rather than the invader;URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Blaming the war on others rather than the invader: Ukraine is the aggressor;URW: Discrediting Ukraine: Discrediting Ukrainian government and officials and policies;URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Discrediting the West, Diplomacy: The West does not care about Ukraine, only about its interests;URW: Praise of Russia: Russia is a guarantor of peace and prosperity;URW: Russia is the Victim: Other"
+PT_220.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_254.txt,PT,"URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Russia is the Victim: Other"
+PT_211.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Doomsday scenarios for humans;CC: Amplifying Climate Fears: Other
+PT_237.txt,PT,"URW: Amplifying war-related fears;URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Discrediting Ukrainian government and officials and policies;URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Praise of Russia: Russia is a guarantor of peace and prosperity;URW: Russia is the Victim: Other"
+PT_250.txt,PT,CC: Amplifying Climate Fears;URW: Praise of Russia;URW: Russia is the Victim,
+PT_224.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other;CC: Criticism of institutions and authorities: Criticism of national governments
+PT_228.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_253.txt,PT,"URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Negative Consequences for the West;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Negative Consequences for the West: Other"
+PT_209.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_202.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_232.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Doomsday scenarios for humans;CC: Amplifying Climate Fears: Other
+PT_245.txt,PT,"URW: Blaming the war on others rather than the invader;URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim",URW: Blaming the war on others rather than the invader: Ukraine is the aggressor;URW: Discrediting Ukraine: Other;URW: Praise of Russia: Praise of Russian military might;URW: Russia is the Victim: Other
+PT_206.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_201.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_249.txt,PT,"URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Discrediting Ukrainian government and officials and policies;URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Praise of Russia: Russia is a guarantor of peace and prosperity;URW: Russia is the Victim: Other"
+PT_210.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_205.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Doomsday scenarios for humans;CC: Amplifying Climate Fears: Other
+PT_230.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_244.txt,PT,"URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Russia is the Victim: Other"
+PT_213.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Doomsday scenarios for humans;CC: Amplifying Climate Fears: Other
+PT_226.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_239.txt,PT,"URW: Amplifying war-related fears;URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy;URW: Praise of Russia;URW: Russia is the Victim","URW: Discrediting Ukraine: Discrediting Ukrainian government and officials and policies;URW: Discrediting Ukraine: Other;URW: Discrediting the West, Diplomacy: Other;URW: Praise of Russia: Russia is a guarantor of peace and prosperity;URW: Russia is the Victim: Other"
+PT_221.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_234.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Doomsday scenarios for humans;CC: Amplifying Climate Fears: Other
+PT_207.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of climate policies;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_217.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_204.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_229.txt,PT,CC: Amplifying Climate Fears,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other
+PT_225.txt,PT,CC: Amplifying Climate Fears;CC: Criticism of institutions and authorities,CC: Amplifying Climate Fears: Amplifying existing fears of global warming;CC: Amplifying Climate Fears: Other;CC: Criticism of institutions and authorities: Criticism of national governments
