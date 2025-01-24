@@ -117,7 +117,7 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
 def train(texts, labels_coarse, labels_fine, language_train,
           val_texts, val_labels_coarse, val_labels_fine, language_val,
           all_classes_coarse, all_classes_fine, name,
-          max_doc_length=924, vocab_size=21811, embedding_dim=100):
+          max_doc_length=924, vocab_size=16988, embedding_dim=100):
 
     # Tokenizer
     tokenizer = Tokenizer(num_words=vocab_size)
@@ -204,7 +204,8 @@ if __name__ == '__main__':
     classes_coarse = open("subtask2_narratives.txt").read().split("\n")
     classes_fine = open("subtask2_subnarratives.txt").read().split("\n")
 
-    df_train = pd.read_csv("./train_2025_01.csv")
+    #df_train = pd.read_csv("./train_2025_01.csv")
+    df_train = pd.read_csv("../balanced_training_data.csv")
     df_val = pd.read_csv("./test_2025_01.csv")
 
     texts_train = df_train["cleaned"].apply(lambda entry: entry.split()).to_list()
@@ -230,4 +231,4 @@ if __name__ == '__main__':
           lang_val,
           classes_coarse,
           classes_fine,
-          "new-2")
+          "new-3")
