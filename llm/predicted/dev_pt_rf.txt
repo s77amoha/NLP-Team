@@ -1,0 +1,35 @@
+PT_203.txt	CC: Amplifying Climate Fears	Other
+PT_208.txt	CC: Amplifying Climate Fears	Other
+PT_216.txt	Other	Other
+PT_233.txt	CC: Amplifying Climate Fears	Other
+PT_241.txt	Other	Other
+PT_259.txt	URW: Blaming the war on others rather than the invader;URW: Discrediting Ukraine;URW: Discrediting the West, Diplomacy	URW: Blaming the war on others rather than the invader: Ukraine is the aggressor;URW: Discrediting Ukraine: Discrediting Ukrainian government and officials and policies;URW: Discrediting the West, Diplomacy: Other;URW: Discrediting the West, Diplomacy: The West does not care about Ukraine, only about its interests
+PT_220.txt	CC: Amplifying Climate Fears	Other
+PT_254.txt	Other	Other
+PT_211.txt	CC: Amplifying Climate Fears	Other
+PT_237.txt	Other	Other
+PT_250.txt	Other	Other
+PT_224.txt	Other	Other
+PT_228.txt	CC: Amplifying Climate Fears	Other
+PT_253.txt	URW: Discrediting the West, Diplomacy;URW: Negative Consequences for the West	URW: Discrediting the West, Diplomacy: Other;URW: Negative Consequences for the West: Other;URW: Negative Consequences for the West: Sanctions imposed by Western countries will backfire
+PT_209.txt	Other	Other
+PT_202.txt	CC: Amplifying Climate Fears	Other
+PT_232.txt	CC: Amplifying Climate Fears	Other
+PT_245.txt	URW: Discrediting Ukraine	Other
+PT_206.txt	CC: Amplifying Climate Fears	Other
+PT_201.txt	CC: Amplifying Climate Fears	Other
+PT_249.txt	URW: Discrediting Ukraine	Other
+PT_210.txt	CC: Amplifying Climate Fears	Other
+PT_205.txt	CC: Amplifying Climate Fears	Other
+PT_230.txt	CC: Amplifying Climate Fears	Other
+PT_244.txt	Other	Other
+PT_213.txt	CC: Amplifying Climate Fears	Other
+PT_226.txt	CC: Amplifying Climate Fears	Other
+PT_239.txt	URW: Discrediting Ukraine	Other
+PT_221.txt	CC: Amplifying Climate Fears	Other
+PT_234.txt	CC: Amplifying Climate Fears	Other
+PT_207.txt	Other	Other
+PT_217.txt	CC: Amplifying Climate Fears	Other
+PT_204.txt	Other	Other
+PT_229.txt	CC: Amplifying Climate Fears	Other
+PT_225.txt	CC: Amplifying Climate Fears	Other
