@@ -50,7 +50,7 @@ def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix
     sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.3, name="Dropout_1"),
+        Dropout(0.2, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
@@ -60,10 +60,11 @@ def create_model_coarse(num_labels, max_doc_length, vocab_size, embedding_matrix
     concat = concatenate([language_info, sequential_part1], name="Concat")
     sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
-        Dense(100, activation='relu', name="Dense_7"),
-        Dense(64, activation='elu', name="Dense_8"),
+        Dropout(0.2, name="Dropout_2"),
+        Dense(200, activation='relu', name="Dense_7"),
+        Dense(100, activation='relu', name="Dense_8"),
+        Dense(64, activation='elu', name="Dense_9"),
         Dense(num_labels, activation="sigmoid", name="Output")
     ], name="NN2")(concat)
 
@@ -86,7 +87,7 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
     sequential_part1 = Sequential([
         Dense(500, activation='relu', name="Dense_1"),
         Dense(500, activation='relu', name="Dense_2"),
-        Dropout(0.3, name="Dropout_1"),
+        Dropout(0.2, name="Dropout_1"),
         Dense(350, activation='relu', name="Dense_3"),
         Dense(350, activation='relu', name="Dense_4"),
         GlobalMaxPooling1D(name="GlobalMaxPooling"),
@@ -96,10 +97,11 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
     concat = concatenate([language_info, sequential_part1], name="Concat")
     sequential_part2 = Sequential([
         Dense(200, activation='relu', name="Dense_5"),
-        Dropout(0.2, name="Dropout_2"),
         Dense(200, activation='relu', name="Dense_6"),
-        Dense(100, activation='relu', name="Dense_7"),
-        Dense(64, activation='elu', name="Dense_8"),
+        Dropout(0.2, name="Dropout_2"),
+        Dense(200, activation='relu', name="Dense_7"),
+        Dense(100, activation='relu', name="Dense_8"),
+        Dense(64, activation='elu', name="Dense_9"),
         Dense(num_labels, activation="sigmoid", name="Output")
     ], name="NN2")(concat)
 
@@ -115,11 +117,11 @@ def create_model_fine(num_labels, max_doc_length, vocab_size, embedding_matrix, 
 def train(texts, labels_coarse, labels_fine, language_train,
           val_texts, val_labels_coarse, val_labels_fine, language_val,
           all_classes_coarse, all_classes_fine, name,
-          max_doc_length=924, vocab_size=21543, embedding_dim=100):
+          max_doc_length=924, vocab_size=16988, embedding_dim=100):
 
     # Tokenizer
     tokenizer = Tokenizer(num_words=vocab_size)
-    tokenizer.fit_on_texts(texts + texts_val)
+    tokenizer.fit_on_texts(texts + val_texts)
     sequences = tokenizer.texts_to_sequences(texts)
     sequence_pad = pad_sequences(sequences, maxlen=max_doc_length, padding='post')
     val_sequences = tokenizer.texts_to_sequences(val_texts)
@@ -133,11 +135,11 @@ def train(texts, labels_coarse, labels_fine, language_train,
 
     # Add language information
     language_train = np.array(language_train)
-    language_train[language_train == "en"] = 1
-    language_train[language_train == "pt"] = -1
+    language_train[language_train == "EN"] = 1
+    language_train[language_train == "PT"] = -1
     language_val = np.array(language_val)
-    language_val[language_val == "en"] = 1
-    language_val[language_val == "pt"] = -1
+    language_val[language_val == "EN"] = 1
+    language_val[language_val == "PT"] = -1
 
     sequence_pad = np.column_stack((language_train, sequence_pad))
     val_sequence_pad = np.column_stack((language_val, val_sequence_pad))
@@ -148,7 +150,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
         pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     #Word2Vec Embedding
-    word2vec_model = Word2Vec(texts, vector_size=embedding_dim, window=10, min_count=1, workers=4)
+    word2vec_model = Word2Vec(texts, vector_size=embedding_dim, window=12, min_count=2, workers=4)
 
     embedding_matrix = np.zeros((len(tokenizer.word_index) + 1, embedding_dim))
     for word, i in tokenizer.word_index.items():
@@ -182,7 +184,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
     print("Coarse Model....")
     coarse_submodel.fit(sequence_pad,
                         labels_coarse,
-                        epochs=30,
+                        epochs=50,
                         verbose=1,
                         callbacks=[coarse_checkpoint],
                         validation_data=(val_sequence_pad, val_labels_coarse),
@@ -191,7 +193,7 @@ def train(texts, labels_coarse, labels_fine, language_train,
     print("Fine Model....")
     fine_submodel.fit(sequence_pad,
                       labels_fine,
-                      epochs=40,
+                      epochs=50,
                       verbose=1,
                       callbacks=[fine_checkpoint],
                       validation_data=(val_sequence_pad, val_labels_fine),
@@ -202,26 +204,22 @@ if __name__ == '__main__':
     classes_coarse = open("subtask2_narratives.txt").read().split("\n")
     classes_fine = open("subtask2_subnarratives.txt").read().split("\n")
 
-    df = pd.concat([pd.read_csv("../target.csv"), pd.read_csv("../training_data.csv")], ignore_index=True).drop_duplicates(subset="title", keep="first")
+    #df_train = pd.read_csv("./train_2025_01.csv")
+    df_train = pd.read_csv("../balanced_training_data.csv")
+    df_val = pd.read_csv("./test_2025_01.csv")
 
-    texts = df["content"].apply(lambda entry: entry.split()).to_numpy()
-    languages = df["language"].to_numpy()
-    labels_coarse = df["narrative"].apply(lambda entry: entry.split(";")).to_numpy()
-    labels_fine = df["subnarrative"].apply(lambda entry: entry.split(";")).to_numpy()
+    texts_train = df_train["cleaned"].apply(lambda entry: entry.split()).to_list()
+    lang_train = df_train["language"].to_list()
+    labels_coarse_train = df_train["narrative"].apply(lambda entry: entry.split(";")).to_list()
+    labels_fine_train = df_train["sub_narrative"].apply(lambda entry: entry.split(";")).to_list()
 
-    print(len(texts))
+    texts_val = df_val["cleaned"].apply(lambda entry: entry.split()).to_list()
+    lang_val = df_val["language"].to_list()
+    labels_coarse_val = df_val["narrative"].apply(lambda entry: entry.split(";")).to_list()
+    labels_fine_val = df_val["sub_narrative"].apply(lambda entry: entry.split(";")).to_list()
 
-    train_indices = np.load("./train_indices.npy", allow_pickle=True)
-    val_indices = np.load("./val_indices.npy", allow_pickle=True)
-
-    texts_train = list([texts[i] for i in train_indices])
-    labels_coarse_train = list([labels_coarse[i] for i in train_indices])
-    labels_fine_train = list([labels_fine[i] for i in train_indices])
-    lang_train = list([languages[i] for i in train_indices])
-    texts_val = list([texts[i] for i in val_indices])
-    labels_coarse_val = list([labels_coarse[i] for i in val_indices])
-    labels_fine_val = list([labels_fine[i] for i in val_indices])
-    lang_val = list([languages[i] for i in val_indices])
+    print(f"Number of training texts: {len(texts_train)}")
+    print(f"Number of val texts: {len(texts_val)}")
 
     train(texts_train,
           labels_coarse_train,
@@ -233,4 +231,4 @@ if __name__ == '__main__':
           lang_val,
           classes_coarse,
           classes_fine,
-          "attempt3-window10")
+          "new-3")
