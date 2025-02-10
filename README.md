@@ -1,5 +1,8 @@
 # Performance Comparison of Different ML Architectures for Narrative Classification
 
+[Link to the GitHub Repository](https://github.com/s77amoha/NLP-Team)
+
+
 # NLP-Team
 NLP Team 23
 
